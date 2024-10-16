@@ -1,3 +1,4 @@
+<%@page import="dto.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -18,10 +19,27 @@
         <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">FAQs</a></li>
         <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">About</a></li>
       </ul>
+      
+      <!-- 로그인 전 보여줄 메뉴 -->
+      <%
+      	// 세션에 담긴 정보는 어느 페이지(jsp, servlet)던 사용 가능함
+      	MemberDTO loginDto = (MemberDTO)session.getAttribute("loginDto");
+      if (loginDto == null){
+      %>
       <ul class="nav">
-        <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">Login</a></li>
-        <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">Sign up</a></li>
+        <li class="nav-item"><a href="/member/login.jsp" class="nav-link link-body-emphasis px-2">Login</a></li>
+        <li class="nav-item"><a href="/member/register.jsp" class="nav-link link-body-emphasis px-2">Sign up</a></li>
       </ul>
+      <% } else { %>
+      
+      <!-- 로그인 후 보여줄 메뉴 -->
+      <ul class="nav">
+        <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2" id="logout">Logout</a></li>
+        <li class="nav-item"><a href="/member/info.jsp" class="nav-link link-body-emphasis px-2">Info</a></li>
+      </ul>
+    <script src="/js/logout.js"></script>
+      <% } %>
+      
     </div>
   </nav>
   <header class="py-3 mb-4 border-bottom">
@@ -35,5 +53,5 @@
       </form>
     </div>
   </header>
-  <div class="container">
+ <div class="container">
   <!-- main container -->

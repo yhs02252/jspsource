@@ -19,6 +19,7 @@
     </tr>
   </thead>
   <tbody>
+  <!-- 로그인 할 때 헤더에서 실행하는 코드중 DTO로 받아오는 변수와 겹치지 않게 주의 -->
   <%for(BookDTO dto:list) {%>
     <tr>
       <td><%=dto.getCode()%></td>

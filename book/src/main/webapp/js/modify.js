@@ -19,6 +19,7 @@ document.querySelector("body div:nth-child(3) form").addEventListener("submit", 
 	
 	const price = document.querySelector("#price");	
 	
+	
 	// 1(1) ~ 100000000(10)
 	// * : 0 ~ 무한대
 	const regEx = /^[0-9]{3,10}$/;
