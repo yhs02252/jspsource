@@ -7,15 +7,16 @@
 
 	MemberDTO dto = new MemberDTO();
 	dto.setUserid(request.getParameter("userid"));
+	dto.setName(request.getParameter("name"));
 	dto.setPassword(request.getParameter("password"));
-
-	MemberDAO dao = new MemberDAO();
-	MemberDTO loginDto = dao.islogin(dto);
 	
-	if(loginDto!=null){
-		session.setAttribute("loginDto", loginDto);
-		response.sendRedirect("/book/list_pro.jsp");
-	}else{
+	MemberDAO dao = new MemberDAO();
+	int regDto = dao.insert(dto);
+	
+	if(regDto==0){
+		response.sendRedirect("register.jsp");
+	} else {
 		response.sendRedirect("login.jsp");
 	}
+
 %>

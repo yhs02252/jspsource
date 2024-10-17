@@ -8,6 +8,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 import dto.ChangeDTO;
 import dto.MemberDTO;
 
@@ -29,26 +34,27 @@ public class MemberDAO {
     private PreparedStatement pstmt;
     private ResultSet rs;
 
-	static {
-		try {
-			Class.forName("oracle.jdbc.OracleDriver");			
-		} catch (ClassNotFoundException e) {
-			 e.printStackTrace();
-		}
-	}
+//	static {
+//		try {
+//			Class.forName("oracle.jdbc.OracleDriver");			
+//		} catch (ClassNotFoundException e) {
+//			 e.printStackTrace();
+//		}
+//	}
 	
 //	연결 문자열 => DriverManager
-	public Connection getConnection() throws SQLException {
-		
-		// localhost (== 127.0.0.1) : 오라클 서버가 설치된 ip 주소
-		// 1521 : 오라클 기본포트 
-		// xe : 오라클 Express Edition 설치 시 기본 설치되는 DB 명
-		String url = "jdbc:oracle:thin:@localhost:1521:xe";
-        String user = "C##java";
-        String password = "12345";
-        
-        return DriverManager.getConnection(url, user, password);
-	}
+		public Connection getConnection(){
+			Context initContext;
+			try {
+				initContext = new InitialContext();
+				Context envContext  = (Context)initContext.lookup("java:/comp/env");
+				DataSource ds = (DataSource)envContext.lookup("jdbc/oracle");
+				con = ds.getConnection();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return con;
+		}
 	
 	// 자원해제
     public void close(Connection con, PreparedStatement pstmt) {

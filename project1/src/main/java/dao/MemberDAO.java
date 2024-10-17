@@ -198,6 +198,7 @@ public class MemberDAO {
 		return updateRow;
 		
 	}
+	
 	public int delete(String userid, String password) {
 		
 		int deleteRow = 0;
