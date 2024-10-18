@@ -1,14 +1,14 @@
 
 document.querySelector(".btn-primary").addEventListener("click", () => {
 	if(confirm("목록으로 돌아가시겠습니까?")){		
-	location.href = "/list.do";
+	location.href = "/list.do?keyword="+keyword;
 	}
 })
 
 document.querySelector(".btn-danger").addEventListener("click", () => {
 	
 	if(confirm("삭제하시겠습니까?")){
-	location.href = "/delete.do?code="+code;
+	location.href = "/delete.do?code="+code+"&keyword="+keyword;
 	}
 })
 
@@ -26,10 +26,14 @@ document.querySelector("body div:nth-child(3) form").addEventListener("submit", 
 	
 if(confirm("수정 하시겠습니까?")){
 	if(!regEx.test(price.value)){		
-		alert("가격을 입력해주세요");
+		alert("가격은 10자리 까지 입니다");
 //		price.focus();
 		price.select(); // focus + 입력값 존재 시 블럭으로 반환
 		return;
+	} else if(price.value==null){
+		alert("가격을 입력해주세요");
+		price.select();
+		return
 	}
 	
 	e.target.submit();

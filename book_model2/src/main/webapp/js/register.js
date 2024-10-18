@@ -1,4 +1,4 @@
-document.querySelector(".btn-success").addEventListener("click", () => {
+document.querySelector("#register .btn-success").addEventListener("click", () => {
 	
 	// 아이디 가져오기
 	const userid = document.querySelector("#userid").value
@@ -6,7 +6,7 @@ document.querySelector(".btn-success").addEventListener("click", () => {
 	const form = new FormData();
 	form.append("userid",userid);
 		
-	fetch("/member/checkid_pro.jsp",{method:"post",
+	fetch("/dup.do",{method:"post",
 //		 headers:{'content-type':'application/x-www-form-urlencoded'}, 실험
 		 body:new URLSearchParams(form)
 		 })
@@ -18,8 +18,8 @@ document.querySelector(".btn-success").addEventListener("click", () => {
 		console.log(data);
 		
 		if(data.trim()=="true"){
-			alert("사용할 수 있는 아이디입니다")
-		}else{
+			alert("사용할 수 있는 아이디입니다")	
+		} else {
 			alert("중복된 아이디")			
 		}
 	})

@@ -5,18 +5,18 @@
   <div class="row mb-3">
     <label for="userid" class="col-sm-2 col-form-label">아이디</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="userid" name="userid" value="<%=loginDto.getUserid()%>" readonly>
+      <input type="text" class="form-control" id="userid" name="userid" value="${loginDto.userid}" readonly>
     </div>
   </div>
      
   <div class="row mb-3">
     <label for="name" class="col-sm-2 col-form-label">이름</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="name" name="name" value="<%=loginDto.getName()%>" readonly>
+      <input type="text" class="form-control" id="name" name="name" value="${loginDto.name}" readonly>
     </div> 
   </div>
   
-<form method="post" action="info_pro.jsp" id="pass">
+<form method="post" action="/info.do" id="pass">
   <div class="row mb-3">
     <label for="current_password" class="col-sm-2 col-form-label">현재 비밀번호</label>
     <div class="col-sm-10">  
@@ -32,7 +32,7 @@
   
   <button type="submit" class="btn btn-secondary">비밀번호 변경</button>
   <button type="button" class="btn btn-primary">목록으로</button>
-  <input type="hidden" name="userid" value="<%=loginDto.getUserid()%>">
+  <input type="hidden" name="userid" value="${loginDto.userid}">
 </form>
 <script src="/js/change.js"></script>
 <%@include file="../include/footer.jsp"%>

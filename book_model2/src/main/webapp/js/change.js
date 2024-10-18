@@ -10,6 +10,6 @@ document.querySelector("#pass").addEventListener("submit", (e)=>{
 
 document.querySelector(".btn-primary").addEventListener("click", () => {
 	if(confirm("목록으로 돌아가시겠습니까?")){		
-	location.href = "/book/list.do";
+	location.href = "/list.do?keyword=";
 	}
 });

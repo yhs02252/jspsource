@@ -1,6 +1,6 @@
 document.querySelector(".btn-primary").addEventListener("click", () => {
 	if(confirm("목록으로 돌아가시겠습니까?")){		
-	location.href = "/list.do";
+	location.href = "/list.do?keyword=";
 	}
 })
 // 추가 클릭시 form submit 이 일어나면 

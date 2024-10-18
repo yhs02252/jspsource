@@ -1,4 +1,4 @@
 
-document.querySelector("button").addEventListener("click", () => {
-	location.href = "/list.do";
+document.querySelector(".btn-primary").addEventListener("click", () => {
+	location.href = "/list.do?keyword="+keyword;
 })

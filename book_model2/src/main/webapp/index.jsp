@@ -6,7 +6,7 @@
   <div class="bg-body-tertiary p-5 rounded">
     <h1>도서정보 예제</h1>
     <p class="lead">This example is a quick exercise to illustrate how the top-aligned navbar works. As you scroll, this navbar remains in its original position and moves with the rest of the page.</p>
-    <a class="btn btn-lg btn-primary" href="/list.do" role="button">Book List &raquo;</a>
+    <a class="btn btn-lg btn-primary" href="/list.do?keyword=" role="button">Book List &raquo;</a>
   </div>
 </main>
 

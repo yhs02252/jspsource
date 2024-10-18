@@ -70,14 +70,15 @@ public class BookDAO {
 	// List<~~~DTO> : where 절 없는 경우, where 절이 pk 가 아니면
 	// ~~~DTO : where 절이 pk 인 경우
 	
-	public List<BookDTO> getList(){
+	public List<BookDTO> getList(String keyword){
 		List<BookDTO> list = new ArrayList<BookDTO>();
 		
 		try {
 			con = getConnection();
 			
-			String sql = "SELECT * FROM BOOKTBL";
+			String sql = "SELECT * FROM BOOKTBL WHERE title LIKE ? ORDER BY CODE ASC";
 			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
@@ -130,35 +131,6 @@ public class BookDAO {
 		return dto;
 	}
 	
-	
-//	// 특정 제목의 책 조회
-//	public BookDTO getBook(String title) {
-//		BookDTO dto = null;
-//		
-//		try {
-//			con = getConnection();
-//			
-//			String sql = "SELECT * FROM BOOKTBL WHERE title LIKE '%?%'";
-//			pstmt = con.prepareStatement(sql);
-//			pstmt.setString(1, title);
-//			rs = pstmt.executeQuery();
-//			
-//			if(rs.next()) {
-//				dto = new BookDTO();				
-//				dto.setCode(rs.getInt("code"));
-//				dto.setTitle(rs.getString("title"));
-//				dto.setWriter(rs.getString("writer"));
-//				dto.setPrice(rs.getInt("price"));
-//				
-//			}
-//			
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		} finally {
-//			close(con, pstmt, rs);
-//		}
-//		return dto;
-//	}
 	
 	
 	// update - 수정
