@@ -14,7 +14,9 @@ public interface BoardService {
 	
 	public Boolean update(BoardDTO updateDto);
 	
-	public Boolean delete(int bno);
+	public Boolean delete(BoardDTO deleteDto);
 	
 	public Boolean create(BoardDTO insertDto);
+	
+	public Boolean cntUp(int bno);
 }

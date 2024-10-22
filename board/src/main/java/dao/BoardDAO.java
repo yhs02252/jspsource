@@ -68,7 +68,7 @@ public class BoardDAO {
 			
 			con = getConnection();
 			
-			String sql = "SELECT BNO,NAME,TITLE,READCNT,REGDATE FROM BOARD ORDER BY BNO ASC";
+			String sql = "SELECT BNO,NAME,TITLE,READCNT,REGDATE,RE_LEV FROM BOARD ORDER BY RE_REF DESC, RE_SEQ ASC";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
@@ -79,11 +79,10 @@ public class BoardDAO {
 				dto.setTitle(rs.getString("title"));
 				dto.setReadcnt(rs.getInt("readcnt"));
 				dto.setRegdate(rs.getDate("regdate"));		
+				dto.setReLev(rs.getInt("re_lev"));
 				
 				list.add(dto);
-				
 			}
-			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -150,20 +149,19 @@ public class BoardDAO {
 		
 	}
 	
-	public int delete(int bno) {
+	public int delete(BoardDTO deleteDto) {
 		
-		int deleteRow
+		int deleteRow = 0;
 		
 		try {
 			
 			con = getConnection();
-			String sql = ""
+			String sql = "DELETE FROM BOARD WHERE BNO = ? AND PASSWORD = ?";
 			pstmt=con.prepareStatement(sql);
-			pstmt.setString(0, sql);
+			pstmt.setInt(1, deleteDto.getBno());
+			pstmt.setString(2, deleteDto.getPassword());
 			
-			if () {
-				
-			}
+			deleteRow = pstmt.executeUpdate();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -171,34 +169,73 @@ public class BoardDAO {
 			close(con, pstmt);
 		}
 		
-		return ;
+		return deleteRow;
 		
 	}
 	
-	public int create(BoardDTO updateDto) {
+	public int create(BoardDTO insertDto) {
 		
-		Boolean 
-		
+		int insertRow = 0;
+//		int bno = 0;
 		try {
 			
 			con = getConnection();
-			String sql = ""
-			pstmt=con.prepareStatement(sql);
-			pstmt.setString(0, sql);
 			
-			if () {
-				
-			}
+//			String sql = "SELECT board_seq.nextval FROM DUAL";
+//			pstmt=con.prepareStatement(sql);
+//			rs = pstmt.executeQuery();
+//			if(rs.next()) {
+//				bno = rs.getInt(1);
+//			}
+//			
+//			sql = "INSERT INTO BOARD(BNO,NAME,PASSWORD,TITLE,CONTENT,RE_REF,RE_LEV,RE_SEQ) ";
+//			sql += "VALUES(?,?,?,?,?,?,0,0)";
+//			pstmt=con.prepareStatement(sql);
+//			pstmt.setInt(1, bno);
+//			pstmt.setString(2, insertDto.getName());
+//			pstmt.setString(3, insertDto.getPassword());
+//			pstmt.setString(4, insertDto.getTitle());
+//			pstmt.setString(5, insertDto.getContent());
+//			pstmt.setInt(6, bno);
+			
+			String sql = "INSERT INTO BOARD(BNO,NAME,PASSWORD,TITLE,CONTENT,ATTACH,RE_REF,RE_LEV,RE_SEQ) ";
+			sql += "VALUES(board_seq.nextval,?,?,?,?,?,board_seq.currval,0,0)";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, insertDto.getName());
+			pstmt.setString(2, insertDto.getPassword());
+			pstmt.setString(3, insertDto.getTitle());
+			pstmt.setString(4, insertDto.getContent());
+			pstmt.setString(5, insertDto.getAttach());
+			
+			insertRow = pstmt.executeUpdate();
+
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
 			close(con, pstmt);
 		}
+		return insertRow;	
+	};
+	
+	public int readCntUp(int bno) {
 		
-		return ;
+		int readCntRow = 0;
 		
+		try {
+			
+			con = getConnection();
+			
+			String sql = "UPDATE BOARD SET READCNT = READCNT + 1 WHERE BNO = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			readCntRow = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(con, pstmt);
+		}
+		return readCntRow;
 	}
-	
-	
 }

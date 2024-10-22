@@ -28,9 +28,9 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public Boolean delete(int bno) {
+	public Boolean delete(BoardDTO deleteDto) {
 		// TODO Auto-generated method stub
-		return dao.delete(bno)==1?true:false;
+		return dao.delete(deleteDto)==1?true:false;
 	}
 
 	@Override
@@ -39,4 +39,11 @@ public class BoardServiceImpl implements BoardService {
 		return dao.create(insertDto)==1?true:false;
 	}
 
+	@Override
+	public Boolean cntUp(int bno) {
+		// TODO Auto-generated method stub
+		return dao.readCntUp(bno)==1?true:false;
+	}
+
+	
 }

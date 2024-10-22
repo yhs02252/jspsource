@@ -7,7 +7,7 @@ const password = readForm.querySelector("#password")
 const title = readForm.querySelector("#title")
 const content = readForm.querySelector("#content")
 
-	
+// read.jsp 수정, 목록 버튼
 document.querySelector("#readForm .btn-success").addEventListener("click", (e)=>{
 
 	if(confirm("목록으로 돌아가시겠습니까?")){
@@ -19,11 +19,39 @@ document.querySelector("#readForm .btn-success").addEventListener("click", (e)=>
 	}
 })
 
-document.querySelector("#readForm .btn-primary").addEventListener("click",()=>{
-	actionForm.action = "/modify.do";
-	actionForm.submit();
-});
+const infoBtn = document.querySelector("#readForm .btn-info");
+if(infoBtn){
+	infoBtn.addEventListener("click",()=>{
+		
+		actionForm.action = "/modify.do";
+		actionForm.submit();
+	});
+}
 
+
+// 삭제 클릭 시
+// readform action=/delete.do 변경 후 readForm submit
+const deleteBtn = document.querySelector("#readForm .btn-danger")
+if(deleteBtn){
+	deleteBtn.addEventListener("click", ()=>{
+		
+// 		readForm.action = "/delete.do"; 
+//			↑   먼저 실행되도록 하면 action이 바뀐 상태가 되어,  ↑
+//	따로 action을 지정 하지 않은 submit은 수정된 action을 그대로 실행해 버린다.
+		
+		if(confirm("삭제 하시겠습니까?")){
+			if(password.value==""){
+				alert("비밀번호를 입력해 주세요")
+				password.focus();
+				return;
+			}
+			readForm.action = "/delete.do";
+			readForm.submit();
+		}
+	})
+	
+}
+	
 
 // modify.jsp 에서 수정 클릭 시 (submit) => submit 중지
 // readForm password, title, content 값이 있는 지 확인하고
@@ -54,20 +82,3 @@ document.querySelector("#readForm").addEventListener("submit", (e)=>{
 		}
 })
 
-// 삭제 클릭 시
-// readform action=/delete.do 변경 후 readForm submit
-
-document.querySelector("#readForm .btn-danger").addEventListener("click", (e)=>{
-	e.preventDefault();
-	
-	if(confirm("삭제 하시겠습니까?")){
-		if(password.value==""){
-			alert("비밀번호를 입력해 주세요")
-			password.focus();
-			return;
-		}
-		readForm.action = "/delete.do";
-		readForm.submit
-		}
-
-})

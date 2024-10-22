@@ -31,7 +31,7 @@ document.querySelector("tbody").addEventListener("click", (e)=>{
 	
 	// actionForm submit
 	// action: /read.do
-	actionForm.action="/read.do"
+	actionForm.action="/cntUp.do"
 	actionForm.submit();	
 })
 
