@@ -3,20 +3,25 @@ package service;
 import java.util.List;
 
 import dto.BoardDTO;
+import dto.SearchDTO;
 
 // CRUD 호출
 
 public interface BoardService {
 	
-	public List<BoardDTO> listAll();
+	public List<BoardDTO> listAll(SearchDTO searchDTO);
 	
 	public BoardDTO getRow(int bno);
 	
-	public Boolean update(BoardDTO updateDto);
+	public boolean update(BoardDTO updateDto);
 	
-	public Boolean delete(BoardDTO deleteDto);
+	public boolean delete(BoardDTO deleteDto);
 	
-	public Boolean create(BoardDTO insertDto);
+	public boolean create(BoardDTO insertDto);
 	
-	public Boolean cntUp(int bno);
+	public boolean cntUp(int bno);
+	
+	public boolean reply(BoardDTO replyDto);
+	
+	public int totalNum();
 }

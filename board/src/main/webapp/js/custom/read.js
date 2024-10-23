@@ -8,13 +8,13 @@ const title = readForm.querySelector("#title")
 const content = readForm.querySelector("#content")
 
 // read.jsp 수정, 목록 버튼
-document.querySelector("#readForm .btn-success").addEventListener("click", (e)=>{
+document.querySelector("#readForm .btn-success").addEventListener("click", ()=>{
 
 	if(confirm("목록으로 돌아가시겠습니까?")){
 		//actionForm bno 요소 제거
 	actionForm.querySelector("[name='bno']").remove();
 	
-	actionForm.action = "/list.do";
+	actionForm.action = "/list.do?criteria=&keyword=&page=1&amount=10";
 	actionForm.submit();	
 	}
 })
@@ -26,6 +26,17 @@ if(infoBtn){
 		actionForm.action = "/modify.do";
 		actionForm.submit();
 	});
+}
+
+
+// 답변 클릭시 actionform action="/replyview.do" 수정 후 submit
+const replyBtn = readForm.querySelector(".btn-secondary");
+if(replyBtn){
+	replyBtn.addEventListener("click", ()=>{
+		actionForm.action = "/replyView.do";
+		actionForm.submit();
+	})
+	
 }
 
 
