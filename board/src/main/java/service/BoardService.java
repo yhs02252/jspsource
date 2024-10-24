@@ -23,5 +23,5 @@ public interface BoardService {
 	
 	public boolean reply(BoardDTO replyDto);
 	
-	public int totalNum();
+	public int totalNum(SearchDTO searchDTO);
 }

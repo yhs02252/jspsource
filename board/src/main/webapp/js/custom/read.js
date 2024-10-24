@@ -14,7 +14,7 @@ document.querySelector("#readForm .btn-success").addEventListener("click", ()=>{
 		//actionForm bno 요소 제거
 	actionForm.querySelector("[name='bno']").remove();
 	
-	actionForm.action = "/list.do?criteria=&keyword=&page=1&amount=10";
+	actionForm.action = "/list.do";
 	actionForm.submit();	
 	}
 })
@@ -59,6 +59,7 @@ if(deleteBtn){
 			readForm.action = "/delete.do";
 			readForm.submit();
 		}
+		
 	})
 	
 }

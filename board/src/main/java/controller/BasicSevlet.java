@@ -52,23 +52,33 @@ public class BasicSevlet extends HttpServlet {
 		
 		if (cmd.equals("/list.do")) {
 			action = new BoardListAction("/board/list.jsp");
+			
 		} else if(cmd.equals("/read.do")){
 			action = new BoardReadAction("/board/read.jsp");
+			
 		} else if(cmd.equals("/modify.do")){
 			action = new BoardReadAction("/board/modify.jsp");
+			
 		} else if(cmd.equals("/update.do")){
 			action = new BoardUpdateAction("/read.do");
+			
 		} else if(cmd.equals("/delete.do")){
 			action = new BoardDeleteAction("/list.do");
+			
 		} else if(cmd.equals("/create.do")){
 			action = new BoardCreateAction("/list.do");
+			
 		} else if(cmd.equals("/cntUp.do")){
 			action = new BoardReadCntAction("/read.do");
+			
 		} else if(cmd.equals("/replyView.do")){ // 답변 폼 보여주기
 			action = new BoardReadAction("/board/reply.jsp");
+			
 		} else if(cmd.equals("/reply.do")){ // 답변 등록
 			action = new BoardReplyAction("/list.do");
 		}
+		
+		
 		
 		ActionForward af = null;
 		

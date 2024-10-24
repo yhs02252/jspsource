@@ -31,6 +31,11 @@
     <input type="password" class="form-control" id="password" name="password">
   </div>
   
+  	<input type="hidden" name="page" value="1" />
+	<input type="hidden" name="amount" value="10" />
+	<input type="hidden" name="criteria" value="" />
+	<input type="hidden" name="keyword" value="" />
+  
   <button type="submit" class="btn btn-primary">Submit</button>
   <button type="button" class="btn btn-success">목록으로 돌아가기</button>
 </form>

@@ -33,7 +33,7 @@ public class BoardListAction implements Action {
 		BoardService service = new BoardServiceImpl();
 		List<BoardDTO> list = service.listAll(searchDTO);
 		
-		int total = service.totalNum();
+		int total = service.totalNum(searchDTO);
 		PageDTO pageDTO = new PageDTO(searchDTO, total);
 		
 		// list => board 테이블 내용

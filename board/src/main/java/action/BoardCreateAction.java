@@ -2,6 +2,7 @@ package action;
 
 
 import java.io.File;
+import java.net.URLEncoder;
 import java.util.Iterator;
 import java.util.UUID;
 
@@ -28,6 +29,14 @@ public class BoardCreateAction implements Action {
 		dto.setName(request.getParameter("name"));
 		dto.setPassword(request.getParameter("password"));
 		
+		// 페이지 나누기
+		int page = Integer.parseInt(request.getParameter("page"));
+		int amount = Integer.parseInt(request.getParameter("amount"));		
+		
+		// 검색 추가
+		String criteria = request.getParameter("criteria");
+		String keyword = request.getParameter("keyword");
+		
 		// 첨부파일 가져오기
 		Part part = request.getPart("attach");
 		String filename = getFileName(part);
@@ -50,10 +59,10 @@ public class BoardCreateAction implements Action {
 		BoardService service = new BoardServiceImpl();
 		Boolean insertFlag = service.create(dto);
 
-		if (!insertFlag) {
-//			path += "?bno=" + dto.getBno();
-//		} else {
-			path = "create.do?bno="+dto.getBno();
+		if (insertFlag) {
+			path += "?page=" + page + "&amount=" + amount + "&criteria=" + criteria + "&keyword=" + keyword;
+		} else {
+			path = "/board/create.jsp";
 		}
 		
 		return new ActionForward(path, true);

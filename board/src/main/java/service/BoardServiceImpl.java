@@ -53,9 +53,9 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int totalNum() {
+	public int totalNum(SearchDTO searchDTO) {
 		// TODO Auto-generated method stub
-		return dao.totalRows();
+		return dao.totalRows(searchDTO);
 	}
 
 	
