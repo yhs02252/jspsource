@@ -23,10 +23,10 @@
     <label for="attach">첨부파일</label>
     <%
      BoardDTO dto = (BoardDTO)request.getAttribute("dto");
-     String encodeFileName = ""; 
+     String encodeFileName = "";
     	
     	if(dto.getAttach()!=null){
-    		 URLEncoder.encode(dto.getAttach(), "utf-8");    		
+    		encodeFileName = URLEncoder.encode(dto.getAttach(), "utf-8");    		
     	}
     %>
     <div><a href="/board/download.jsp?fileName=<%=encodeFileName%>">${dto.attach}</a></div>
